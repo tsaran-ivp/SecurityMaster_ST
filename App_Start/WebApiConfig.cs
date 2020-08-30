@@ -22,7 +22,7 @@ namespace SecurityMaster_ST
                 defaults: new { id = RouteParameter.Optional }
             );
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
-            config.EnableCors(new EnableCorsAttribute("http://localhost:4200","*","*"));
+            config.EnableCors(new EnableCorsAttribute("*","*","*"));
         }
     }
 }

@@ -17,7 +17,7 @@ namespace SecurityMaster_ST.Controllers
 {
     public class BondController : ApiController
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["IVPDB"].ConnectionString;
+        string connectionString = "data source=192.168.0.104\\sql_express1,63862; database=Training; user=Sa; password=valley@1234"; //Hardcoded Connection String
 
         public HttpResponseMessage Get()
         {
@@ -171,7 +171,8 @@ namespace SecurityMaster_ST.Controllers
                 string filename = postedFile.FileName;
                 var physicalpath = HttpContext.Current.Server.MapPath("~/BondFiles/" + filename);
                 postedFile.SaveAs(physicalpath);
-                string ext = Path.GetExtension(postedFile.FileName);
+                 string ext = Path.GetExtension(postedFile.FileName);
+                
                 //check file extension if excel or csv
                 if (ext.ToLower() == ".xls" || ext.ToLower() == ".xlsx") 
                 { 
@@ -179,13 +180,13 @@ namespace SecurityMaster_ST.Controllers
                 string costring = "";
                 //check which type of excel file
                     if (ext.ToLower() == ".xls") {
-                    costring = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+filename+";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+                    costring = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+physicalpath+";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
                 }
                 else if (ext.ToLower() == ".xlsx") {
-                    costring = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filename + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+                    costring = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + physicalpath + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
                 }
                     //query the excel file and store data in dataset
-                string query = "Select    [Security Description]	,[Security Name],	[Asset Type]	,[Investment Type]	,[Trading Factor]	,[Pricing Factor]	,[ISIN]	,[BBG Ticker]	,[BBG Unique ID]	,[CUSIP]	,[SEDOL]	,[First Coupon Date]	,[Cap],	[Floor],	[Coupon Frequency]	,[Coupon]	,[Coupon Type],[Spread],	[Callable Flag]	,[Fix to Float Flag]	,[Putable Flag],	[Issue Date]	,[Last Reset Date]	,[Maturity]	,[Call Notification Max Days]	,[Put Notification Max Days]	,[Penultimate Coupon Date]	,[Reset Frequency]	,[Has Position]	,[Macaulay Duration]	,[30D Volatility]	,[90D Volatility]	,[Convexity],	[30Day Average Volume]	,[PF Asset Class]	,[PF Country]	,[PF Credit Rating]	,[PF Currency]	,[PF Instrument]	,[PF Liquidity Profile]	,[PF Maturity]	,[PF NAICS Code],	[PF Region],	[PF Sector],	[PF Sub Asset Class]	,[Bloomberg Industry Group]	,[Bloomberg Industry Sub Group]	,[Bloomberg Industry Sector]	,[Country of Issuance]	,[Issue Currency]	,[Issuer]	,[Risk Currency]	,[Put Date],	[Put Price],	[Ask Price]	,[High Price],	[Low Price]	,[Open Price],[Volume]	,[Bid Price]	,[Last Price]	,[Call Date]	,[Call Price]    from [Equities$]";
+                string query = "Select    [Security Description]	,[Security Name],	[Asset Type]	,[Investment Type]	,[Trading Factor]	,[Pricing Factor]	,[ISIN]	,[BBG Ticker]	,[BBG Unique ID]	,[CUSIP]	,[SEDOL]	,[First Coupon Date]	,[Cap],	[Floor],	[Coupon Frequency]	,[Coupon]	,[Coupon Type],[Spread],	[Callable Flag]	,[Fix to Float Flag]	,[Putable Flag],	[Issue Date]	,[Last Reset Date]	,[Maturity]	,[Call Notification Max Days]	,[Put Notification Max Days]	,[Penultimate Coupon Date]	,[Reset Frequency]	,[Has Position]	,[Macaulay Duration]	,[30D Volatility]	,[90D Volatility]	,[Convexity],	[30Day Average Volume]	,[PF Asset Class]	,[PF Country]	,[PF Credit Rating]	,[PF Currency]	,[PF Instrument]	,[PF Liquidity Profile]	,[PF Maturity]	,[PF NAICS Code],	[PF Region],	[PF Sector],	[PF Sub Asset Class]	,[Bloomberg Industry Group]	,[Bloomberg Industry Sub Group]	,[Bloomberg Industry Sector]	,[Country of Issuance]	,[Issue Currency]	,[Issuer]	,[Risk Currency]	,[Put Date],	[Put Price],	[Ask Price]	,[High Price],	[Low Price]	,[Open Price],[Volume]	,[Bid Price]	,[Last Price]	,[Call Date]	,[Call Price]    from [Bonds$]";
                 OleDbConnection conn = new OleDbConnection(costring);
                 if (conn.State==System.Data.ConnectionState.Closed)
                 {
@@ -256,7 +257,7 @@ namespace SecurityMaster_ST.Controllers
                         cmd.Parameters.AddWithValue("@PFNAICSCode", dr["PF NAICS Code"].ToString());
                         cmd.Parameters.AddWithValue("@PFRegion", dr["PF Region"].ToString());
                         cmd.Parameters.AddWithValue("@PFSector", dr["PF Sector"].ToString());
-                        cmd.Parameters.AddWithValue("@PFSubAssetClass", dr["PF SubAsset Class"].ToString());
+                        cmd.Parameters.AddWithValue("@PFSubAssetClass", dr["PF Sub Asset Class"].ToString());
                         cmd.Parameters.AddWithValue("@BloombergIndustryGroup", dr["Bloomberg Industry Group"].ToString());
                         cmd.Parameters.AddWithValue("@BloombergIndustrySubGroup", dr["Bloomberg Industry Sub Group"].ToString());
                         cmd.Parameters.AddWithValue("@BloombergIndustrySector", dr["Bloomberg Industry Sector"].ToString());
@@ -385,10 +386,10 @@ namespace SecurityMaster_ST.Controllers
                 } else { return "enter only csv/excel file"; }
              
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                return " could not insert ";
+                return e.Message;
             }
 
         }
