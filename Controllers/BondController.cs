@@ -257,7 +257,7 @@ namespace SecurityMaster_ST.Controllers
                         cmd.Parameters.AddWithValue("@PFNAICSCode", dr["PF NAICS Code"].ToString());
                         cmd.Parameters.AddWithValue("@PFRegion", dr["PF Region"].ToString());
                         cmd.Parameters.AddWithValue("@PFSector", dr["PF Sector"].ToString());
-                        cmd.Parameters.AddWithValue("@PFSubAssetClass", dr["PF SubAsset Class"].ToString());
+                        cmd.Parameters.AddWithValue("@PFSubAssetClass", dr["PF Sub Asset Class"].ToString());
                         cmd.Parameters.AddWithValue("@BloombergIndustryGroup", dr["Bloomberg Industry Group"].ToString());
                         cmd.Parameters.AddWithValue("@BloombergIndustrySubGroup", dr["Bloomberg Industry Sub Group"].ToString());
                         cmd.Parameters.AddWithValue("@BloombergIndustrySector", dr["Bloomberg Industry Sector"].ToString());
