@@ -17,7 +17,7 @@ namespace SecurityMaster_ST.Controllers
 {
     public class EquityController : ApiController
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["IVPDB"].ConnectionString;
+        string connectionString = "data source=192.168.0.104\\sql_express1,63862; database=Training; user=Sa; password=valley@1234"; //Hardcoded Connection String
 
         public HttpResponseMessage Get()
         {
@@ -183,11 +183,11 @@ namespace SecurityMaster_ST.Controllers
                     //check which type of excel file
                     if (ext.ToLower() == ".xls")
                     {
-                        costring = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filename + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+                        costring = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + physicalpath + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
                     }
                     else if (ext.ToLower() == ".xlsx")
                     {
-                        costring = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filename + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+                        costring = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + physicalpath + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
                     }
                     //query the excel file and store data in dataset
                     string query = "Select 	[Security Name],	[Security Description],	[Has Position],	[Is Active Security],	[Lot Size],	[BBG Unique Name],	[CUSIP],	[ISIN],	[SEDOL],	[Bloomberg Ticker],	[Bloomberg Unique ID],	[BBG Global ID],	[Ticker and Exchange],	[Is ADR Flag],	[ADR Underlying Ticker],	[ADR Underlying Currency],	[Shares Per ADR],	[IPO Date],	[Pricing Currency],	[Settle Days],	[Total Shares Outstanding],	[Voting Rights Per Share],	[Average Volume - 20D],	[Beta],	[Short Interest],	[Return - YTD],	[Volatility - 90D],	[PF Asset Class],	[PF Country],	[PF Credit Rating],	[PF Currency],	[PF Instrument],	[PF Liquidity Profile],	[PF Maturity],	[PF NAICS Code],	[PF Region],	[PF Sector],	[PF Sub Asset Class],	[Country of Issuance],	[Exchange],	[Issuer],	[Issue Currency],	[Trading Currency],	[BBG Industry Sub Group],	[Bloomberg Industry Group],	[Bloomberg Sector],	[Country of Incorporation],	[Risk Currency],	[Open Price],	[Close Price],	[Volume],	[Last Price],	[Ask Price],	[Bid Price],	[PE Ratio],	[Dividend Declared Date],	[Dividend Ex Date],	[Dividend Record Date], 	[Dividend Pay Date],	[Dividend Amount],	[Frequency],	[Dividend Type] from [Equities$]";
