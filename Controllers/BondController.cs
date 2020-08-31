@@ -224,7 +224,7 @@ namespace SecurityMaster_ST.Controllers
                         cmd.Parameters.AddWithValue("@BBGUniqueID", dr["BBG Unique ID"].ToString());
                         cmd.Parameters.AddWithValue("@CUSIP", dr["CUSIP"].ToString());
                         cmd.Parameters.AddWithValue("@SEDOL", dr["SEDOL"].ToString());
-                        cmd.Parameters.AddWithValue("@FirstCouponDate", dr["First Coupon Date"]);
+                        cmd.Parameters.AddWithValue("@FirstCouponDate", dr["First Coupon Date"].ToString());
                         cmd.Parameters.AddWithValue("@Cap", dr["Cap"].ToString());
                         cmd.Parameters.AddWithValue("@FloorValue", dr["Floor"].ToString());
                         cmd.Parameters.AddWithValue("@CouponFrequency", dr["Coupon Frequency"]);
@@ -234,12 +234,12 @@ namespace SecurityMaster_ST.Controllers
                         cmd.Parameters.AddWithValue("@CallableFlag", dr["Callable Flag"].ToString());
                         cmd.Parameters.AddWithValue("@FixtoFloatFlag", dr["Fix to Float Flag"].ToString());
                         cmd.Parameters.AddWithValue("@PutableFlag", dr["Putable Flag"].ToString());
-                        cmd.Parameters.AddWithValue("@IssueDate", dr["Issue Date"]);
-                        cmd.Parameters.AddWithValue("@LastResetDate", dr["Last Reset Date"]);
-                        cmd.Parameters.AddWithValue("@Maturity", dr["Maturity"]);
+                        cmd.Parameters.AddWithValue("@IssueDate", dr["Issue Date"].ToString());
+                        cmd.Parameters.AddWithValue("@LastResetDate", dr["Last Reset Date"].ToString());
+                        cmd.Parameters.AddWithValue("@Maturity", dr["Maturity"].ToString());
                         cmd.Parameters.AddWithValue("@CallNotificationMaxDays", dr["Call Notification Max Days"]);
                         cmd.Parameters.AddWithValue("@PutNotificationMaxDays", dr["Put Notification Max Days"]);
-                        cmd.Parameters.AddWithValue("@PenultimateCouponDate", dr["Penultimate Coupon Date"]);
+                        cmd.Parameters.AddWithValue("@PenultimateCouponDate", dr["Penultimate Coupon Date"].ToString());
                         cmd.Parameters.AddWithValue("@ResetFrequency", dr["Reset Frequency"].ToString());
                         cmd.Parameters.AddWithValue("@HasPosition", dr["Has Position"].ToString());
                         cmd.Parameters.AddWithValue("@MacaulayDuration", dr["Macaulay Duration"]);
@@ -253,7 +253,7 @@ namespace SecurityMaster_ST.Controllers
                         cmd.Parameters.AddWithValue("@PFCurrency", dr["PF Currency"].ToString());
                         cmd.Parameters.AddWithValue("@PFInstrument", dr["PF Instrument"].ToString());
                         cmd.Parameters.AddWithValue("@PFLiquidityProfile", dr["PF Liquidity Profile"].ToString());
-                        cmd.Parameters.AddWithValue("@PFMaturity", dr["PF Maturity"]);
+                        cmd.Parameters.AddWithValue("@PFMaturity", dr["PF Maturity"].ToString());
                         cmd.Parameters.AddWithValue("@PFNAICSCode", dr["PF NAICS Code"].ToString());
                         cmd.Parameters.AddWithValue("@PFRegion", dr["PF Region"].ToString());
                         cmd.Parameters.AddWithValue("@PFSector", dr["PF Sector"].ToString());
@@ -265,7 +265,7 @@ namespace SecurityMaster_ST.Controllers
                         cmd.Parameters.AddWithValue("@IssueCurrency", dr["Issue Currency"].ToString());
                         cmd.Parameters.AddWithValue("@IssuerName", dr["Issuer"].ToString());
                         cmd.Parameters.AddWithValue("@RiskCurrency", dr["Risk Currency"].ToString());
-                        cmd.Parameters.AddWithValue("@PutDate", dr["Put Date"]);
+                        cmd.Parameters.AddWithValue("@PutDate", dr["Put Date"].ToString());
                         cmd.Parameters.AddWithValue("@PutPrice", dr["Put Price"]);
                         cmd.Parameters.AddWithValue("@AskPrice", dr["Ask Price"]);
                         cmd.Parameters.AddWithValue("@HighPrice", dr["High Price"]);
@@ -274,7 +274,7 @@ namespace SecurityMaster_ST.Controllers
                         cmd.Parameters.AddWithValue("@Volume", dr["Volume"]);
                         cmd.Parameters.AddWithValue("@BidPrice", dr["Bid Price"]);
                         cmd.Parameters.AddWithValue("@LastPrice", dr["Last Price"]);
-                        cmd.Parameters.AddWithValue("@CallDate", dr["Call Date"]);
+                        cmd.Parameters.AddWithValue("@CallDate", dr["Call Date"].ToString());
                         cmd.Parameters.AddWithValue("@CallPrice", dr["Call Price"]);
 
                         con.Open();
