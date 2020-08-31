@@ -37,7 +37,7 @@ namespace SecurityMaster_ST.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, table);
 
-            }
+            } 
 
         }
 
@@ -190,7 +190,7 @@ namespace SecurityMaster_ST.Controllers
 
                     DataSet ds = reader.AsDataSet();
                     reader.Close();
-
+                    ds.Tables[0].Rows[0].Delete();
 
                     //for each new record call the procedure and insert data
 
