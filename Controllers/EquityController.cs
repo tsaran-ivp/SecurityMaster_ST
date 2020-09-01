@@ -88,7 +88,7 @@ namespace SecurityMaster_ST.Controllers
                     cmd.Parameters.AddWithValue("@PFInstrumentVar", equity.PFInstrument);
                     cmd.Parameters.AddWithValue("@PFLiquidityProfileVar", equity.PFLiquidityProfile);
                     cmd.Parameters.AddWithValue("@PFMaturityVar", equity.PFMaturity);
-                    cmd.Parameters.AddWithValue("@PFNAISCCodeVar", equity.PFNAICSCode);
+                    cmd.Parameters.AddWithValue("@PFNAICSCodeVar", equity.PFNAICSCode);
 
                     cmd.Parameters.AddWithValue("@PFRegionVar", equity.PFRegion);
                     cmd.Parameters.AddWithValue("@PFSectorVar", equity.PFSector);
@@ -208,8 +208,8 @@ namespace SecurityMaster_ST.Controllers
                             cmd.CommandType = CommandType.StoredProcedure;
 
 
-                            cmd.Parameters.AddWithValue("@SecurityNameVar", dr[0].ToString());
-                            cmd.Parameters.AddWithValue("@SecurityDescriptionVar", dr[1].ToString());
+                            cmd.Parameters.AddWithValue("@SecurityNameVar", dr[0]);
+                            cmd.Parameters.AddWithValue("@SecurityDescriptionVar", dr[1]);
                             cmd.Parameters.AddWithValue("@HasPositionVar", dr[2].ToString());
                             cmd.Parameters.AddWithValue("@ActiveSecurityVar", dr[3].ToString());
                             cmd.Parameters.AddWithValue("@LotSizeVar",dr[4]);
@@ -227,7 +227,7 @@ namespace SecurityMaster_ST.Controllers
                             cmd.Parameters.AddWithValue("@ADRUnderlyingTickerVar", dr[14].ToString());
                             cmd.Parameters.AddWithValue("@ADRUnderlyingCurrencyVar", dr[15].ToString());
                             cmd.Parameters.AddWithValue("@SharesPerADRVar", dr[16]);
-                            cmd.Parameters.AddWithValue("@IPODateVar", new string(dr[17].ToString().ToCharArray().Reverse().ToArray()));
+                            cmd.Parameters.AddWithValue("@IPODateVar", dr[17]);
 
                             cmd.Parameters.AddWithValue("@PricingCurrencyVar", dr[18].ToString());
                             cmd.Parameters.AddWithValue("@SettleDaysVar", dr[19]);
@@ -247,8 +247,8 @@ namespace SecurityMaster_ST.Controllers
                             cmd.Parameters.AddWithValue("@PFCurrencyVar", dr[30].ToString());
                             cmd.Parameters.AddWithValue("@PFInstrumentVar", dr[31].ToString());
                             cmd.Parameters.AddWithValue("@PFLiquidityProfileVar", dr[32].ToString());
-                            cmd.Parameters.AddWithValue("@PFMaturityVar", new string(dr[33].ToString().ToCharArray().Reverse().ToArray()));
-                            cmd.Parameters.AddWithValue("@PFNAISCCodeVar", dr[34].ToString());
+                            cmd.Parameters.AddWithValue("@PFMaturityVar", dr[33]);
+                            cmd.Parameters.AddWithValue("@PFNAICSCodeVar", dr[34].ToString());
 
                             cmd.Parameters.AddWithValue("@PFRegionVar", dr[35].ToString());
                             cmd.Parameters.AddWithValue("@PFSectorVar", dr[36].ToString());
@@ -274,13 +274,13 @@ namespace SecurityMaster_ST.Controllers
                             cmd.Parameters.AddWithValue("@PERatioVar", dr[54]);
 
 
-                            cmd.Parameters.AddWithValue("@DividendDeclareDateVar", new string(dr[55].ToString().ToCharArray().Reverse().ToArray()));
-                            cmd.Parameters.AddWithValue("@DividendExDateVar", new string( dr[56].ToString().ToCharArray().Reverse().ToArray()));
-                            cmd.Parameters.AddWithValue("@DividendRecordDateVar", new string(dr[57].ToString().ToCharArray().Reverse().ToArray()));
-                            cmd.Parameters.AddWithValue("@DividendPayDateVar", new string(dr[58].ToString().ToCharArray().Reverse().ToArray()));
+                            cmd.Parameters.AddWithValue("@DividendDeclareDateVar",dr[55]);
+                            cmd.Parameters.AddWithValue("@DividendExDateVar", dr[56]);
+                            cmd.Parameters.AddWithValue("@DividendRecordDateVar", dr[57]);
+                            cmd.Parameters.AddWithValue("@DividendPayDateVar", dr[58]);
                             cmd.Parameters.AddWithValue("@DividendAmountVar", dr[59]);
-                            cmd.Parameters.AddWithValue("@FrequencyVar", dr[60].ToString());
-                            cmd.Parameters.AddWithValue("@DividendTypeVar", dr[61].ToString());
+                            cmd.Parameters.AddWithValue("@FrequencyVar", dr[60]);
+                            cmd.Parameters.AddWithValue("@DividendTypeVar", dr[61]);
 
                             con.Open();
                             SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
