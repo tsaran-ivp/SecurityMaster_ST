@@ -24,17 +24,17 @@ namespace SecurityMaster_ST.Models
         public string ADRFlag { get; set; }
         public string ADRUnderlyingTicker { get; set; }
         public string ADRUnderlyingCurrency { get; set; }
-        public Nullable<decimal> SharesPerADR { get; set; }
+        public Nullable<float> SharesPerADR { get; set; }
         public Nullable<System.DateTime> IPODate { get; set; }
         public string PricingCurrency { get; set; }
         public Nullable<int> SettleDays { get; set; }
         public Nullable<float> OutstandingShares { get; set; }
-        public Nullable<double> VotingRightsPerShare { get; set; }
+        public Nullable<float> VotingRightsPerShare { get; set; }
         public Nullable<float> AverageVolume { get; set; }
-        public Nullable<double> Beta { get; set; }
+        public Nullable<float> Beta { get; set; }
         public Nullable<float> ShortInterest { get; set; }
-        public Nullable<decimal> ReturnYTD { get; set; }
-        public Nullable<double> Volatility { get; set; }
+        public Nullable<float> ReturnYTD { get; set; }
+        public Nullable<float> Volatility { get; set; }
         public string AssetClass { get; set; }
         public string PFCountry { get; set; }
         public string PFCreditRating { get; set; }
@@ -56,18 +56,18 @@ namespace SecurityMaster_ST.Models
         public string BBGSector { get; set; }
         public string CountryOfIncorporation { get; set; }
         public string RiskCurrency { get; set; }
-        public Nullable<double> OpenPrice { get; set; }
-        public Nullable<double> ClosePrice { get; set; }
-        public Nullable<decimal> Volume { get; set; }
-        public Nullable<double> LastPrice { get; set; }
-        public Nullable<double> AskPrice { get; set; }
-        public Nullable<double> BidPrice { get; set; }
-        public Nullable<double> PERatio { get; set; }
+        public Nullable<float> OpenPrice { get; set; }
+        public Nullable<float> ClosePrice { get; set; }
+        public Nullable<float> Volume { get; set; }
+        public Nullable<float> LastPrice { get; set; }
+        public Nullable<float> AskPrice { get; set; }
+        public Nullable<float> BidPrice { get; set; }
+        public Nullable<float> PERatio { get; set; }
         public Nullable<System.DateTime> DividendDeclareDate { get; set; }
         public Nullable<System.DateTime> DividendExDate { get; set; }
         public Nullable<System.DateTime> DividendRecordDate { get; set; }
         public Nullable<System.DateTime> DividendPayDate { get; set; }
-        public Nullable<double> DividendAmount { get; set; }
+        public Nullable<float> DividendAmount { get; set; }
         public string Frequency { get; set; }
         public string DividendType { get; set; }
     }

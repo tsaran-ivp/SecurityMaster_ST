@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.UI.WebControls;
+using ExcelDataReader;
 
 namespace SecurityMaster_ST.Controllers
 {
@@ -42,9 +43,10 @@ namespace SecurityMaster_ST.Controllers
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     DataTable table = new DataTable();
-                    string spName = "Equity.usp_UpdateInDB";
+                    string spName = "Equity.UpdateRecordsInDB";
                     SqlCommand cmd = new SqlCommand(spName, con);
                     cmd.CommandType = CommandType.StoredProcedure;
+
                     cmd.Parameters.AddWithValue("@ID", equity.ID);
                     cmd.Parameters.AddWithValue("@SecurityNameVar", equity.SecurityName);
                     cmd.Parameters.AddWithValue("@SecurityDescriptionVar", equity.SecurityDescription);
@@ -176,30 +178,21 @@ namespace SecurityMaster_ST.Controllers
                 if (ext.ToLower() == ".xls" || ext.ToLower() == ".xlsx")
                 {
 
-                    string costring = "";
+                    Stream stream = postedFile.InputStream;
+                    IExcelDataReader reader = null;
                     //check which type of excel file
                     if (ext.ToLower() == ".xls")
                     {
-                        costring = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + physicalpath + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+                        reader = ExcelReaderFactory.CreateBinaryReader(stream);
                     }
                     else if (ext.ToLower() == ".xlsx")
-                    {
-                        costring = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + physicalpath + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-                    }
-                    //query the excel file and store data in dataset
-                    string query = "Select 	[Security Name],	[Security Description],	[Has Position],	[Is Active Security],	[Lot Size],	[BBG Unique Name],	[CUSIP],	[ISIN],	[SEDOL],	[Bloomberg Ticker],	[Bloomberg Unique ID],	[BBG Global ID],	[Ticker and Exchange],	[Is ADR Flag],	[ADR Underlying Ticker],	[ADR Underlying Currency],	[Shares Per ADR],	[IPO Date],	[Pricing Currency],	[Settle Days],	[Total Shares Outstanding],	[Voting Rights Per Share],	[Average Volume - 20D],	[Beta],	[Short Interest],	[Return - YTD],	[Volatility - 90D],	[PF Asset Class],	[PF Country],	[PF Credit Rating],	[PF Currency],	[PF Instrument],	[PF Liquidity Profile],	[PF Maturity],	[PF NAICS Code],	[PF Region],	[PF Sector],	[PF Sub Asset Class],	[Country of Issuance],	[Exchange],	[Issuer],	[Issue Currency],	[Trading Currency],	[BBG Industry Sub Group],	[Bloomberg Industry Group],	[Bloomberg Sector],	[Country of Incorporation],	[Risk Currency],	[Open Price],	[Close Price],	[Volume],	[Last Price],	[Ask Price],	[Bid Price],	[PE Ratio],	[Dividend Declared Date],	[Dividend Ex Date],	[Dividend Record Date], 	[Dividend Pay Date],	[Dividend Amount],	[Frequency],	[Dividend Type] from [Equities$]";
+                    { reader = ExcelReaderFactory.CreateOpenXmlReader(stream); }
+                  
 
-                    OleDbConnection conn = new OleDbConnection(costring);
-                    if (conn.State == System.Data.ConnectionState.Closed)
-                    {
-                        conn.Open();
-                    }
-                    OleDbCommand commandEquity = new OleDbCommand(query, conn);
-                    OleDbDataAdapter oleDataAdapter = new OleDbDataAdapter(commandEquity);
-                    DataSet dataSet = new DataSet();
-                    oleDataAdapter.Dispose();
-                    conn.Close();
-                    conn.Dispose();
+                    DataSet dataSet = reader.AsDataSet();
+                    reader.Close();
+                    dataSet.Tables[0].Rows.RemoveAt(0);
+
 
                     //for each new record call the procedure and insert data
 
