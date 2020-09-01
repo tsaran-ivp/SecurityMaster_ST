@@ -123,7 +123,7 @@ namespace SecurityMaster_ST.Controllers
                     cmd.Parameters.AddWithValue("@DividendTypeVar", equity.DividendType);
                     con.Open();
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                   
+                    dataAdapter.Fill(table);
 
                     return "Update Successful";
                 }
