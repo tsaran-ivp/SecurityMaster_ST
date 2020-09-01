@@ -208,79 +208,79 @@ namespace SecurityMaster_ST.Controllers
                             cmd.CommandType = CommandType.StoredProcedure;
 
 
-                            cmd.Parameters.AddWithValue("@SecurityNameVar", dr["Security Name"].ToString());
-                            cmd.Parameters.AddWithValue("@SecurityDescriptionVar", dr["Security Description"].ToString());
-                            cmd.Parameters.AddWithValue("@HasPositionVar", dr["Has  Position"].ToString());
-                            cmd.Parameters.AddWithValue("@ActiveSecurityVar", dr["Active Security"].ToString());
-                            cmd.Parameters.AddWithValue("@LotSizeVar", dr["Lot Size"]);
-                            cmd.Parameters.AddWithValue("@BBGUniqueNameVar", dr["BBG Unique Name"].ToString());
+                            cmd.Parameters.AddWithValue("@SecurityNameVar", dr[0].ToString());
+                            cmd.Parameters.AddWithValue("@SecurityDescriptionVar", dr[1].ToString());
+                            cmd.Parameters.AddWithValue("@HasPositionVar", dr[2].ToString());
+                            cmd.Parameters.AddWithValue("@ActiveSecurityVar", dr[3].ToString());
+                            cmd.Parameters.AddWithValue("@LotSizeVar", int.Parse(dr[4].ToString()));
+                            cmd.Parameters.AddWithValue("@BBGUniqueNameVar", dr[5].ToString());
 
-                            cmd.Parameters.AddWithValue("@CUSIPVar", dr["CUSIP"].ToString());
-                            cmd.Parameters.AddWithValue("@ISINVar", dr["ISIN"].ToString());
-                            cmd.Parameters.AddWithValue("@SEDOLVar", dr["SEDOL"].ToString());
-                            cmd.Parameters.AddWithValue("@BBGtickerVar", dr["Bloomberg Ticker"].ToString());
-                            cmd.Parameters.AddWithValue("@BBGUIDVar", dr["Bloomberg Unique ID"].ToString());
-                            cmd.Parameters.AddWithValue("@BBGGlobalIDVar", dr["BBG Global ID"].ToString());
-                            cmd.Parameters.AddWithValue("@BBGTickerandExchangeVar", dr["Ticker and Exchange"].ToString());
+                            cmd.Parameters.AddWithValue("@CUSIPVar", dr[6].ToString());
+                            cmd.Parameters.AddWithValue("@ISINVar", dr[7].ToString());
+                            cmd.Parameters.AddWithValue("@SEDOLVar", dr[8].ToString());
+                            cmd.Parameters.AddWithValue("@BBGtickerVar", dr[9].ToString());
+                            cmd.Parameters.AddWithValue("@BBGUIDVar", dr[10].ToString());
+                            cmd.Parameters.AddWithValue("@BBGGlobalIDVar", dr[11].ToString());
+                            cmd.Parameters.AddWithValue("@BBGTickerandExchangeVar", dr[12].ToString());
 
-                            cmd.Parameters.AddWithValue("@ADRFlagVar", dr["Is ADR Flag"].ToString());
-                            cmd.Parameters.AddWithValue("@ADRUnderlyingTickerVar", dr["ADR Underlying Ticker"].ToString());
-                            cmd.Parameters.AddWithValue("@ADRUnderlyingCurrencyVar", dr["ADR Underlying Currency"].ToString());
-                            cmd.Parameters.AddWithValue("@SharesPerADRVar", dr["Shares Per ADR"]);
-                            cmd.Parameters.AddWithValue("@IPODateVar", dr["IPO Date"]);
+                            cmd.Parameters.AddWithValue("@ADRFlagVar", dr[13].ToString());
+                            cmd.Parameters.AddWithValue("@ADRUnderlyingTickerVar", dr[14].ToString());
+                            cmd.Parameters.AddWithValue("@ADRUnderlyingCurrencyVar", dr[15].ToString());
+                            cmd.Parameters.AddWithValue("@SharesPerADRVar", float.Parse(dr[16].ToString()));
+                            cmd.Parameters.AddWithValue("@IPODateVar", DateTime.Parse(dr[17].ToString()));
 
-                            cmd.Parameters.AddWithValue("@PricingCurrencyVar", dr["Pricing Currency"].ToString());
-                            cmd.Parameters.AddWithValue("@SettleDaysVar", dr["Settle Days"]);
-                            cmd.Parameters.AddWithValue("@OutstandingSharesVar", dr["Total Shares Outstanding"]);
-                            cmd.Parameters.AddWithValue("@VotingRightsPerShareVar", dr["Voting Rights Per Share"]);
+                            cmd.Parameters.AddWithValue("@PricingCurrencyVar", dr[18].ToString());
+                            cmd.Parameters.AddWithValue("@SettleDaysVar", int.Parse(dr[19].ToString()));
+                            cmd.Parameters.AddWithValue("@OutstandingSharesVar", float.Parse(dr[20].ToString()));
+                            cmd.Parameters.AddWithValue("@VotingRightsPerShareVar", float.Parse(dr[21].ToString()));
 
-                            cmd.Parameters.AddWithValue("@AverageVolume20DVar", dr["Average Volume - 20D"]);
-                            cmd.Parameters.AddWithValue("@BetaVar", dr["Beta"]);
-                            cmd.Parameters.AddWithValue("@ShortInterestVar", dr["Short Interest"]);
-                            cmd.Parameters.AddWithValue("@ReturnYTDVar", dr["Return - YTD"]);
-                            cmd.Parameters.AddWithValue("@Volatility90DayVar", dr["Volatility - 90D"]);
-
-
-                            cmd.Parameters.AddWithValue("@AssetClassVar", dr["PF Asset Class"].ToString());
-                            cmd.Parameters.AddWithValue("@PFCountryVar", dr["PF Country"].ToString());
-                            cmd.Parameters.AddWithValue("@PFCreditRatingVar", dr["PF Credit Rating"].ToString());
-                            cmd.Parameters.AddWithValue("@PFCurrencyVar", dr["PF Currency"].ToString());
-                            cmd.Parameters.AddWithValue("@PFInstrumentVar", dr["PF Instrument"].ToString());
-                            cmd.Parameters.AddWithValue("@PFLiquidityProfileVar", dr["PF Liquidity Profile"].ToString());
-                            cmd.Parameters.AddWithValue("@PFMaturityVar", dr["PF Maturity"]);
-                            cmd.Parameters.AddWithValue("@PFNAISCCodeVar", dr["PF NAICS Code"].ToString());
-
-                            cmd.Parameters.AddWithValue("@PFRegionVar", dr["PF Region"].ToString());
-                            cmd.Parameters.AddWithValue("@PFSectorVar", dr["PF Sector"].ToString());
-                            cmd.Parameters.AddWithValue("@PFSubAssetClassVar", dr["PF Sub Asset Class"].ToString());
-
-                            cmd.Parameters.AddWithValue("@CountryOfIssuanceVar", dr["Country of Issuance"].ToString());
-                            cmd.Parameters.AddWithValue("@ExchangeVar", dr["Exchange"].ToString());
-                            cmd.Parameters.AddWithValue("@IssuerNameVar", dr["Issuer"].ToString());
-                            cmd.Parameters.AddWithValue("@IssueCurrencyVar", dr["Issue Currency"].ToString());
-                            cmd.Parameters.AddWithValue("@TradingCurrencyVar", dr["Trading Currency"].ToString());
-                            cmd.Parameters.AddWithValue("@BBGIndustrySubGroupVar", dr["BBG Industry Sub Group"].ToString());
-                            cmd.Parameters.AddWithValue("@BBGIndustryGroupVar", dr["Bloomberg Industry Group"].ToString());
-
-                            cmd.Parameters.AddWithValue("@BBGSectorVar", dr["Bloomberg Sector"].ToString());
-                            cmd.Parameters.AddWithValue("@CountryOfIncorporationVar", dr["Country of Incorporation"].ToString());
-                            cmd.Parameters.AddWithValue("@RiskCurrencyVar", dr["Risk Currency"].ToString());
-                            cmd.Parameters.AddWithValue("@OpenPriceVar", dr["Open Price"]);
-                            cmd.Parameters.AddWithValue("@ClosePriceVar", dr["Close Price"]);
-                            cmd.Parameters.AddWithValue("@VolumeVar", dr["Volume"]);
-                            cmd.Parameters.AddWithValue("@LastPriceVar", dr["Last Price"]);
-                            cmd.Parameters.AddWithValue("@AskPriceVar", dr["Ask Price"]);
-                            cmd.Parameters.AddWithValue("@BidPriceVar", dr["Bid Price"]);
-                            cmd.Parameters.AddWithValue("@PERatioVar", dr["PE Ratio"]);
+                            cmd.Parameters.AddWithValue("@AverageVolume20DVar", float.Parse(dr[22].ToString()));
+                            cmd.Parameters.AddWithValue("@BetaVar", float.Parse(dr[23].ToString()));
+                            cmd.Parameters.AddWithValue("@ShortInterestVar", float.Parse(dr[24].ToString()));
+                            cmd.Parameters.AddWithValue("@ReturnYTDVar", float.Parse(dr[25].ToString()));
+                            cmd.Parameters.AddWithValue("@Volatility90DayVar", float.Parse(dr[26].ToString()));
 
 
-                            cmd.Parameters.AddWithValue("@DividendDeclareDateVar", dr["Dividend Declared Date"]);
-                            cmd.Parameters.AddWithValue("@DividendExDateVar", dr["Dividend Ex Date"]);
-                            cmd.Parameters.AddWithValue("@DividendRecordDateVar", dr["Dividend Record Date"]);
-                            cmd.Parameters.AddWithValue("@DividendPayDateVar", dr["Dividend Pay Date"]);
-                            cmd.Parameters.AddWithValue("@DividendAmountVar", dr["Dividend Amount"]);
-                            cmd.Parameters.AddWithValue("@FrequencyVar", dr["Frequency"].ToString());
-                            cmd.Parameters.AddWithValue("@DividendTypeVar", dr["Dividend Type"].ToString());
+                            cmd.Parameters.AddWithValue("@AssetClassVar", dr[27].ToString());
+                            cmd.Parameters.AddWithValue("@PFCountryVar", dr[28].ToString());
+                            cmd.Parameters.AddWithValue("@PFCreditRatingVar", dr[29].ToString());
+                            cmd.Parameters.AddWithValue("@PFCurrencyVar", dr[30].ToString());
+                            cmd.Parameters.AddWithValue("@PFInstrumentVar", dr[31].ToString());
+                            cmd.Parameters.AddWithValue("@PFLiquidityProfileVar", dr[32].ToString());
+                            cmd.Parameters.AddWithValue("@PFMaturityVar", DateTime.Parse(dr[33].ToString()));
+                            cmd.Parameters.AddWithValue("@PFNAISCCodeVar", dr[34].ToString());
+
+                            cmd.Parameters.AddWithValue("@PFRegionVar", dr[35].ToString());
+                            cmd.Parameters.AddWithValue("@PFSectorVar", dr[36].ToString());
+                            cmd.Parameters.AddWithValue("@PFSubAssetClassVar", dr[37].ToString());
+
+                            cmd.Parameters.AddWithValue("@CountryOfIssuanceVar", dr[28].ToString());
+                            cmd.Parameters.AddWithValue("@ExchangeVar", dr[39].ToString());
+                            cmd.Parameters.AddWithValue("@IssuerNameVar", dr[40].ToString());
+                            cmd.Parameters.AddWithValue("@IssueCurrencyVar", dr[41].ToString());
+                            cmd.Parameters.AddWithValue("@TradingCurrencyVar", dr[42].ToString());
+                            cmd.Parameters.AddWithValue("@BBGIndustrySubGroupVar", dr[43].ToString());
+                            cmd.Parameters.AddWithValue("@BBGIndustryGroupVar", dr[44].ToString());
+
+                            cmd.Parameters.AddWithValue("@BBGSectorVar", dr[45].ToString());
+                            cmd.Parameters.AddWithValue("@CountryOfIncorporationVar", dr[46].ToString());
+                            cmd.Parameters.AddWithValue("@RiskCurrencyVar", dr[47].ToString());
+                            cmd.Parameters.AddWithValue("@OpenPriceVar", float.Parse(dr[48].ToString()));
+                            cmd.Parameters.AddWithValue("@ClosePriceVar", float.Parse(dr[49].ToString()));
+                            cmd.Parameters.AddWithValue("@VolumeVar", float.Parse(dr[50].ToString()));
+                            cmd.Parameters.AddWithValue("@LastPriceVar", float.Parse(dr[51].ToString()));
+                            cmd.Parameters.AddWithValue("@AskPriceVar", float.Parse(dr[52].ToString()));
+                            cmd.Parameters.AddWithValue("@BidPriceVar", float.Parse(dr[53].ToString()));
+                            cmd.Parameters.AddWithValue("@PERatioVar", float.Parse(dr[54].ToString()));
+
+
+                            cmd.Parameters.AddWithValue("@DividendDeclareDateVar", DateTime.Parse(dr[55].ToString()));
+                            cmd.Parameters.AddWithValue("@DividendExDateVar", DateTime.Parse(dr[55].ToString()));
+                            cmd.Parameters.AddWithValue("@DividendRecordDateVar", DateTime.Parse(dr[55].ToString()));
+                            cmd.Parameters.AddWithValue("@DividendPayDateVar", DateTime.Parse(dr[55].ToString()));
+                            cmd.Parameters.AddWithValue("@DividendAmountVar", float.Parse(dr[59].ToString()));
+                            cmd.Parameters.AddWithValue("@FrequencyVar", dr[60].ToString());
+                            cmd.Parameters.AddWithValue("@DividendTypeVar", dr[61].ToString());
 
                             con.Open();
                             SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
