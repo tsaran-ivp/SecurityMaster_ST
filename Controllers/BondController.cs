@@ -190,7 +190,7 @@ namespace SecurityMaster_ST.Controllers
 
                     DataSet ds = reader.AsDataSet();
                     reader.Close();
-
+                    ds.Tables[0].Rows.RemoveAt(0);
                     //for each new record call the procedure and insert data
 
                 foreach (DataRow dr in ds.Tables[0].Rows)
