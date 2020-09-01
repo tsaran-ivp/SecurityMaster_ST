@@ -226,19 +226,19 @@ namespace SecurityMaster_ST.Controllers
                             cmd.Parameters.AddWithValue("@ADRFlagVar", dr[13].ToString());
                             cmd.Parameters.AddWithValue("@ADRUnderlyingTickerVar", dr[14].ToString());
                             cmd.Parameters.AddWithValue("@ADRUnderlyingCurrencyVar", dr[15].ToString());
-                            cmd.Parameters.AddWithValue("@SharesPerADRVar", float.Parse(dr[16].ToString()));
-                            cmd.Parameters.AddWithValue("@IPODateVar", DateTime.Parse(dr[17].ToString()));
+                            cmd.Parameters.AddWithValue("@SharesPerADRVar", float.Parse(dr[16].ToString(), System.Globalization.CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@IPODateVar", new string(dr[17].ToString().ToCharArray().Reverse().ToArray()));
 
                             cmd.Parameters.AddWithValue("@PricingCurrencyVar", dr[18].ToString());
                             cmd.Parameters.AddWithValue("@SettleDaysVar", int.Parse(dr[19].ToString()));
-                            cmd.Parameters.AddWithValue("@OutstandingSharesVar", float.Parse(dr[20].ToString()));
-                            cmd.Parameters.AddWithValue("@VotingRightsPerShareVar", float.Parse(dr[21].ToString()));
+                            cmd.Parameters.AddWithValue("@OutstandingSharesVar", float.Parse(dr[20].ToString(), System.Globalization.CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@VotingRightsPerShareVar", float.Parse(dr[21].ToString(), System.Globalization.CultureInfo.InvariantCulture));
 
                             cmd.Parameters.AddWithValue("@AverageVolume20DVar", float.Parse(dr[22].ToString()));
-                            cmd.Parameters.AddWithValue("@BetaVar", float.Parse(dr[23].ToString()));
-                            cmd.Parameters.AddWithValue("@ShortInterestVar", float.Parse(dr[24].ToString()));
-                            cmd.Parameters.AddWithValue("@ReturnYTDVar", float.Parse(dr[25].ToString()));
-                            cmd.Parameters.AddWithValue("@Volatility90DayVar", float.Parse(dr[26].ToString()));
+                            cmd.Parameters.AddWithValue("@BetaVar", float.Parse(dr[23].ToString(),System.Globalization.CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@ShortInterestVar", float.Parse(dr[24].ToString(), System.Globalization.CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@ReturnYTDVar", float.Parse(dr[25].ToString(), System.Globalization.CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@Volatility90DayVar", float.Parse(dr[26].ToString(), System.Globalization.CultureInfo.InvariantCulture));
 
 
                             cmd.Parameters.AddWithValue("@AssetClassVar", dr[27].ToString());
@@ -247,7 +247,7 @@ namespace SecurityMaster_ST.Controllers
                             cmd.Parameters.AddWithValue("@PFCurrencyVar", dr[30].ToString());
                             cmd.Parameters.AddWithValue("@PFInstrumentVar", dr[31].ToString());
                             cmd.Parameters.AddWithValue("@PFLiquidityProfileVar", dr[32].ToString());
-                            cmd.Parameters.AddWithValue("@PFMaturityVar", DateTime.Parse(dr[33].ToString()));
+                            cmd.Parameters.AddWithValue("@PFMaturityVar", new string(dr[33].ToString().ToCharArray().Reverse().ToArray()));
                             cmd.Parameters.AddWithValue("@PFNAISCCodeVar", dr[34].ToString());
 
                             cmd.Parameters.AddWithValue("@PFRegionVar", dr[35].ToString());
@@ -265,20 +265,20 @@ namespace SecurityMaster_ST.Controllers
                             cmd.Parameters.AddWithValue("@BBGSectorVar", dr[45].ToString());
                             cmd.Parameters.AddWithValue("@CountryOfIncorporationVar", dr[46].ToString());
                             cmd.Parameters.AddWithValue("@RiskCurrencyVar", dr[47].ToString());
-                            cmd.Parameters.AddWithValue("@OpenPriceVar", float.Parse(dr[48].ToString()));
-                            cmd.Parameters.AddWithValue("@ClosePriceVar", float.Parse(dr[49].ToString()));
-                            cmd.Parameters.AddWithValue("@VolumeVar", float.Parse(dr[50].ToString()));
-                            cmd.Parameters.AddWithValue("@LastPriceVar", float.Parse(dr[51].ToString()));
-                            cmd.Parameters.AddWithValue("@AskPriceVar", float.Parse(dr[52].ToString()));
-                            cmd.Parameters.AddWithValue("@BidPriceVar", float.Parse(dr[53].ToString()));
-                            cmd.Parameters.AddWithValue("@PERatioVar", float.Parse(dr[54].ToString()));
+                            cmd.Parameters.AddWithValue("@OpenPriceVar", float.Parse(dr[48].ToString(), System.Globalization.CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@ClosePriceVar", float.Parse(dr[49].ToString(), System.Globalization.CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@VolumeVar", float.Parse(dr[50].ToString(), System.Globalization.CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@LastPriceVar", float.Parse(dr[51].ToString(), System.Globalization.CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@AskPriceVar", float.Parse(dr[52].ToString(), System.Globalization.CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@BidPriceVar", float.Parse(dr[53].ToString(), System.Globalization.CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@PERatioVar", float.Parse(dr[54].ToString(), System.Globalization.CultureInfo.InvariantCulture));
 
 
-                            cmd.Parameters.AddWithValue("@DividendDeclareDateVar", DateTime.Parse(dr[55].ToString()));
-                            cmd.Parameters.AddWithValue("@DividendExDateVar", DateTime.Parse(dr[55].ToString()));
-                            cmd.Parameters.AddWithValue("@DividendRecordDateVar", DateTime.Parse(dr[55].ToString()));
-                            cmd.Parameters.AddWithValue("@DividendPayDateVar", DateTime.Parse(dr[55].ToString()));
-                            cmd.Parameters.AddWithValue("@DividendAmountVar", float.Parse(dr[59].ToString()));
+                            cmd.Parameters.AddWithValue("@DividendDeclareDateVar", new string(dr[55].ToString().ToCharArray().Reverse().ToArray()));
+                            cmd.Parameters.AddWithValue("@DividendExDateVar", new string( dr[56].ToString().ToCharArray().Reverse().ToArray()));
+                            cmd.Parameters.AddWithValue("@DividendRecordDateVar", new string(dr[57].ToString().ToCharArray().Reverse().ToArray()));
+                            cmd.Parameters.AddWithValue("@DividendPayDateVar", new string(dr[58].ToString().ToCharArray().Reverse().ToArray()));
+                            cmd.Parameters.AddWithValue("@DividendAmountVar", float.Parse(dr[59].ToString(), System.Globalization.CultureInfo.InvariantCulture));
                             cmd.Parameters.AddWithValue("@FrequencyVar", dr[60].ToString());
                             cmd.Parameters.AddWithValue("@DividendTypeVar", dr[61].ToString());
 
