@@ -12,12 +12,13 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.UI.WebControls;
+using ExcelDataReader;
 
 namespace SecurityMaster_ST.Controllers
 {
     public class BondController : ApiController
     {
-        string connectionString = "data source=192.168.0.104\\sql_express1,63862; database=Training; user=Sa; password=valley@1234"; //Hardcoded Connection String
+        string connectionString = "data source=192.168.0.104\\sql_express1,63862; database=SecurityMaster_ST; user=Sa; password=valley@1234"; //Hardcoded Connection String
 
         public HttpResponseMessage Get()
         {
@@ -36,7 +37,7 @@ namespace SecurityMaster_ST.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, table);
 
-            }
+            } 
 
         }
 
@@ -175,31 +176,21 @@ namespace SecurityMaster_ST.Controllers
                 
                 //check file extension if excel or csv
                 if (ext.ToLower() == ".xls" || ext.ToLower() == ".xlsx") 
-                { 
+                {
+                    Stream stream = postedFile.InputStream;
+                    IExcelDataReader reader = null;
                 
-                string costring = "";
                 //check which type of excel file
                     if (ext.ToLower() == ".xls") {
-                    costring = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+physicalpath+";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+                        reader = ExcelReaderFactory.CreateBinaryReader(stream);
                 }
                 else if (ext.ToLower() == ".xlsx") {
-                    costring = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + physicalpath + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+                        reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
                 }
-                    //query the excel file and store data in dataset
-                string query = "Select    [Security Description]	,[Security Name],	[Asset Type]	,[Investment Type]	,[Trading Factor]	,[Pricing Factor]	,[ISIN]	,[BBG Ticker]	,[BBG Unique ID]	,[CUSIP]	,[SEDOL]	,[First Coupon Date]	,[Cap],	[Floor],	[Coupon Frequency]	,[Coupon]	,[Coupon Type],[Spread],	[Callable Flag]	,[Fix to Float Flag]	,[Putable Flag],	[Issue Date]	,[Last Reset Date]	,[Maturity]	,[Call Notification Max Days]	,[Put Notification Max Days]	,[Penultimate Coupon Date]	,[Reset Frequency]	,[Has Position]	,[Macaulay Duration]	,[30D Volatility]	,[90D Volatility]	,[Convexity],	[30Day Average Volume]	,[PF Asset Class]	,[PF Country]	,[PF Credit Rating]	,[PF Currency]	,[PF Instrument]	,[PF Liquidity Profile]	,[PF Maturity]	,[PF NAICS Code],	[PF Region],	[PF Sector],	[PF Sub Asset Class]	,[Bloomberg Industry Group]	,[Bloomberg Industry Sub Group]	,[Bloomberg Industry Sector]	,[Country of Issuance]	,[Issue Currency]	,[Issuer]	,[Risk Currency]	,[Put Date],	[Put Price],	[Ask Price]	,[High Price],	[Low Price]	,[Open Price],[Volume]	,[Bid Price]	,[Last Price]	,[Call Date]	,[Call Price]    from [Bonds$]";
-                OleDbConnection conn = new OleDbConnection(costring);
-                if (conn.State==System.Data.ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
-                OleDbCommand cmdd = new OleDbCommand(query, conn);
-                OleDbDataAdapter daa = new OleDbDataAdapter(cmdd);
-                DataSet ds = new DataSet();
-                daa.Fill(ds);
-                daa.Dispose();
-                conn.Close();
-                conn.Dispose();
-                    
+
+                    DataSet ds = reader.AsDataSet();
+                    reader.Close();
+
                     //for each new record call the procedure and insert data
 
                 foreach (DataRow dr in ds.Tables[0].Rows)
@@ -213,69 +204,69 @@ namespace SecurityMaster_ST.Controllers
                     SqlCommand cmd = new SqlCommand(command, con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@SecurityDescription", dr["Security Description"].ToString());
-                        cmd.Parameters.AddWithValue("@SecurityName", dr["Security Name"].ToString());
-                        cmd.Parameters.AddWithValue("@AssetType", dr["Asset Type"].ToString());
-                        cmd.Parameters.AddWithValue("@InvestmentType", dr["Investment Type"].ToString());
-                        cmd.Parameters.AddWithValue("@TradingFactor", dr["Trading Factor"]);
-                        cmd.Parameters.AddWithValue("@PricingFactor", dr["Pricing Factor"]);
-                        cmd.Parameters.AddWithValue("@ISIN", dr["ISIN"].ToString());
-                        cmd.Parameters.AddWithValue("@BBGTicker", dr["BBG Ticker"].ToString());
-                        cmd.Parameters.AddWithValue("@BBGUniqueID", dr["BBG Unique ID"].ToString());
-                        cmd.Parameters.AddWithValue("@CUSIP", dr["CUSIP"].ToString());
-                        cmd.Parameters.AddWithValue("@SEDOL", dr["SEDOL"].ToString());
-                        cmd.Parameters.AddWithValue("@FirstCouponDate", dr["First Coupon Date"]);
-                        cmd.Parameters.AddWithValue("@Cap", dr["Cap"].ToString());
-                        cmd.Parameters.AddWithValue("@FloorValue", dr["Floor"].ToString());
-                        cmd.Parameters.AddWithValue("@CouponFrequency", dr["Coupon Frequency"]);
-                        cmd.Parameters.AddWithValue("@Coupon", dr["Coupon"]);
-                        cmd.Parameters.AddWithValue("@CouponType", dr["Coupon Type"].ToString());
-                        cmd.Parameters.AddWithValue("@Spread", dr["Spread"].ToString());
-                        cmd.Parameters.AddWithValue("@CallableFlag", dr["Callable Flag"].ToString());
-                        cmd.Parameters.AddWithValue("@FixtoFloatFlag", dr["Fix to Float Flag"].ToString());
-                        cmd.Parameters.AddWithValue("@PutableFlag", dr["Putable Flag"].ToString());
-                        cmd.Parameters.AddWithValue("@IssueDate", dr["Issue Date"]);
-                        cmd.Parameters.AddWithValue("@LastResetDate", dr["Last Reset Date"]);
-                        cmd.Parameters.AddWithValue("@Maturity", dr["Maturity"]);
-                        cmd.Parameters.AddWithValue("@CallNotificationMaxDays", dr["Call Notification Max Days"]);
-                        cmd.Parameters.AddWithValue("@PutNotificationMaxDays", dr["Put Notification Max Days"]);
-                        cmd.Parameters.AddWithValue("@PenultimateCouponDate", dr["Penultimate Coupon Date"]);
-                        cmd.Parameters.AddWithValue("@ResetFrequency", dr["Reset Frequency"].ToString());
-                        cmd.Parameters.AddWithValue("@HasPosition", dr["Has Position"].ToString());
-                        cmd.Parameters.AddWithValue("@MacaulayDuration", dr["Macaulay Duration"]);
-                        cmd.Parameters.AddWithValue("@Volatility_30D", dr["30D Volatility"]);
-                        cmd.Parameters.AddWithValue("@Volatility_90D", dr["90D Volatility"]);
-                        cmd.Parameters.AddWithValue("@Convexity", dr["Convexity"]);
-                        cmd.Parameters.AddWithValue("@AverageVolume_30Day", dr["30Day Average Volume"]);
-                        cmd.Parameters.AddWithValue("@PFAssetClass", dr["PF Asset Class"].ToString());
-                        cmd.Parameters.AddWithValue("@PFCountry", dr["PF Country"].ToString());
-                        cmd.Parameters.AddWithValue("@PFCreditRating", dr["PF Credit Rating"].ToString());
-                        cmd.Parameters.AddWithValue("@PFCurrency", dr["PF Currency"].ToString());
-                        cmd.Parameters.AddWithValue("@PFInstrument", dr["PF Instrument"].ToString());
-                        cmd.Parameters.AddWithValue("@PFLiquidityProfile", dr["PF Liquidity Profile"].ToString());
-                        cmd.Parameters.AddWithValue("@PFMaturity", dr["PF Maturity"]);
-                        cmd.Parameters.AddWithValue("@PFNAICSCode", dr["PF NAICS Code"].ToString());
-                        cmd.Parameters.AddWithValue("@PFRegion", dr["PF Region"].ToString());
-                        cmd.Parameters.AddWithValue("@PFSector", dr["PF Sector"].ToString());
-                        cmd.Parameters.AddWithValue("@PFSubAssetClass", dr["PF Sub Asset Class"].ToString());
-                        cmd.Parameters.AddWithValue("@BloombergIndustryGroup", dr["Bloomberg Industry Group"].ToString());
-                        cmd.Parameters.AddWithValue("@BloombergIndustrySubGroup", dr["Bloomberg Industry Sub Group"].ToString());
-                        cmd.Parameters.AddWithValue("@BloombergIndustrySector", dr["Bloomberg Industry Sector"].ToString());
-                        cmd.Parameters.AddWithValue("@CountryofIssuance", dr["Country of Issuance"].ToString());
-                        cmd.Parameters.AddWithValue("@IssueCurrency", dr["Issue Currency"].ToString());
-                        cmd.Parameters.AddWithValue("@IssuerName", dr["Issuer"].ToString());
-                        cmd.Parameters.AddWithValue("@RiskCurrency", dr["Risk Currency"].ToString());
-                        cmd.Parameters.AddWithValue("@PutDate", dr["Put Date"]);
-                        cmd.Parameters.AddWithValue("@PutPrice", dr["Put Price"]);
-                        cmd.Parameters.AddWithValue("@AskPrice", dr["Ask Price"]);
-                        cmd.Parameters.AddWithValue("@HighPrice", dr["High Price"]);
-                        cmd.Parameters.AddWithValue("@LowPrice", dr["Low Price"]);
-                        cmd.Parameters.AddWithValue("@OpenPrice", dr["Open Price"]);
-                        cmd.Parameters.AddWithValue("@Volume", dr["Volume"]);
-                        cmd.Parameters.AddWithValue("@BidPrice", dr["Bid Price"]);
-                        cmd.Parameters.AddWithValue("@LastPrice", dr["Last Price"]);
-                        cmd.Parameters.AddWithValue("@CallDate", dr["Call Date"]);
-                        cmd.Parameters.AddWithValue("@CallPrice", dr["Call Price"]);
+                        cmd.Parameters.AddWithValue("@SecurityDescription", dr[0].ToString());
+                        cmd.Parameters.AddWithValue("@SecurityName", dr[1].ToString());
+                        cmd.Parameters.AddWithValue("@AssetType", dr[2].ToString());
+                        cmd.Parameters.AddWithValue("@InvestmentType", dr[3].ToString());
+                        cmd.Parameters.AddWithValue("@TradingFactor", dr[4].ToString());
+                        cmd.Parameters.AddWithValue("@PricingFactor", dr[5].ToString());
+                        cmd.Parameters.AddWithValue("@ISIN", dr[6].ToString());
+                        cmd.Parameters.AddWithValue("@BBGTicker", dr[7].ToString());
+                        cmd.Parameters.AddWithValue("@BBGUniqueID", dr[8].ToString());
+                        cmd.Parameters.AddWithValue("@CUSIP", dr[9].ToString());
+                        cmd.Parameters.AddWithValue("@SEDOL", dr[10].ToString());
+                        cmd.Parameters.AddWithValue("@FirstCouponDate", dr[11].ToString());
+                        cmd.Parameters.AddWithValue("@Cap", dr[12].ToString());
+                        cmd.Parameters.AddWithValue("@FloorValue", dr[13].ToString());
+                        cmd.Parameters.AddWithValue("@CouponFrequency", dr[14].ToString());
+                        cmd.Parameters.AddWithValue("@Coupon", dr[15].ToString());
+                        cmd.Parameters.AddWithValue("@CouponType", dr[16].ToString());
+                        cmd.Parameters.AddWithValue("@Spread", dr[17].ToString());
+                        cmd.Parameters.AddWithValue("@CallableFlag", dr[18].ToString());
+                        cmd.Parameters.AddWithValue("@FixtoFloatFlag", dr[19].ToString());
+                        cmd.Parameters.AddWithValue("@PutableFlag", dr[20].ToString());
+                        cmd.Parameters.AddWithValue("@IssueDate", dr[21].ToString());
+                        cmd.Parameters.AddWithValue("@LastResetDate", dr[22].ToString());
+                        cmd.Parameters.AddWithValue("@Maturity", dr[23].ToString());
+                        cmd.Parameters.AddWithValue("@CallNotificationMaxDays", dr[24].ToString());
+                        cmd.Parameters.AddWithValue("@PutNotificationMaxDays", dr[25].ToString());
+                        cmd.Parameters.AddWithValue("@PenultimateCouponDate", dr[26].ToString());
+                        cmd.Parameters.AddWithValue("@ResetFrequency", dr[27].ToString());
+                        cmd.Parameters.AddWithValue("@HasPosition", dr[28].ToString());
+                        cmd.Parameters.AddWithValue("@MacaulayDuration", dr[29].ToString());
+                        cmd.Parameters.AddWithValue("@Volatility_30D", dr[30].ToString());
+                        cmd.Parameters.AddWithValue("@Volatility_90D", dr[31].ToString());
+                        cmd.Parameters.AddWithValue("@Convexity", dr[32].ToString());
+                        cmd.Parameters.AddWithValue("@AverageVolume_30Day", dr[33].ToString());
+                        cmd.Parameters.AddWithValue("@PFAssetClass", dr[34].ToString());
+                        cmd.Parameters.AddWithValue("@PFCountry", dr[35].ToString());
+                        cmd.Parameters.AddWithValue("@PFCreditRating", dr[36].ToString());
+                        cmd.Parameters.AddWithValue("@PFCurrency", dr[37].ToString());
+                        cmd.Parameters.AddWithValue("@PFInstrument", dr[38].ToString());
+                        cmd.Parameters.AddWithValue("@PFLiquidityProfile", dr[39].ToString());
+                        cmd.Parameters.AddWithValue("@PFMaturity", dr[40].ToString());
+                        cmd.Parameters.AddWithValue("@PFNAICSCode", dr[41].ToString());
+                        cmd.Parameters.AddWithValue("@PFRegion", dr[42].ToString());
+                        cmd.Parameters.AddWithValue("@PFSector", dr[43].ToString());
+                        cmd.Parameters.AddWithValue("@PFSubAssetClass", dr[44].ToString());
+                        cmd.Parameters.AddWithValue("@BloombergIndustryGroup", dr[45].ToString());
+                        cmd.Parameters.AddWithValue("@BloombergIndustrySubGroup", dr[46].ToString());
+                        cmd.Parameters.AddWithValue("@BloombergIndustrySector", dr[47].ToString());
+                        cmd.Parameters.AddWithValue("@CountryofIssuance", dr[48].ToString());
+                        cmd.Parameters.AddWithValue("@IssueCurrency", dr[49].ToString());
+                        cmd.Parameters.AddWithValue("@IssuerName", dr[50].ToString());
+                        cmd.Parameters.AddWithValue("@RiskCurrency", dr[51].ToString());
+                        cmd.Parameters.AddWithValue("@PutDate", dr[52].ToString());
+                        cmd.Parameters.AddWithValue("@PutPrice", dr[53].ToString());
+                        cmd.Parameters.AddWithValue("@AskPrice", dr[54].ToString());
+                        cmd.Parameters.AddWithValue("@HighPrice", dr[55].ToString());
+                        cmd.Parameters.AddWithValue("@LowPrice", dr[56].ToString());
+                        cmd.Parameters.AddWithValue("@OpenPrice", dr[57].ToString());
+                        cmd.Parameters.AddWithValue("@Volume", dr[58].ToString());
+                        cmd.Parameters.AddWithValue("@BidPrice", dr[59].ToString());
+                        cmd.Parameters.AddWithValue("@LastPrice", dr[60].ToString());
+                        cmd.Parameters.AddWithValue("@CallDate", dr[61].ToString());
+                        cmd.Parameters.AddWithValue("@CallPrice", dr[62].ToString());
 
                         con.Open();
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
