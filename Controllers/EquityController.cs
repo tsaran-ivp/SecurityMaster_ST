@@ -17,7 +17,7 @@ namespace SecurityMaster_ST.Controllers
 {
     public class EquityController : ApiController
     {
-        string connectionString = "data source=192.168.0.104\\sql_express1,63862; database=Training; user=Sa; password=valley@1234"; //Hardcoded Connection String
+        string connectionString = "data source=192.168.0.104\\sql_express1,63862; database=SecurityMaster_ST; user=Sa; password=valley@1234"; //Hardcoded Connection String
 
         public HttpResponseMessage Get()
         {
@@ -25,8 +25,7 @@ namespace SecurityMaster_ST.Controllers
             {
                 DataTable table = new DataTable();
                 string spName = "Equity.usp_ViewRecords";
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = spName;
+                SqlCommand cmd = new SqlCommand(spName,con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -44,8 +43,7 @@ namespace SecurityMaster_ST.Controllers
                 {
                     DataTable table = new DataTable();
                     string spName = "Equity.usp_UpdateInDB";
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.CommandText = spName;
+                    SqlCommand cmd = new SqlCommand(spName, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ID", equity.ID);
                     cmd.Parameters.AddWithValue("@SecurityNameVar", equity.SecurityName);
@@ -144,8 +142,7 @@ namespace SecurityMaster_ST.Controllers
                 {
                     DataTable table = new DataTable();
                     string spName = "Equity.usp_DeleteFromDB";
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.CommandText = spName;
+                    SqlCommand cmd = new SqlCommand(spName, con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ID", ID);
                     con.Open();
