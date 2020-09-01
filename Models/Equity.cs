@@ -24,24 +24,24 @@ namespace SecurityMaster_ST.Models
         public string ADRFlag { get; set; }
         public string ADRUnderlyingTicker { get; set; }
         public string ADRUnderlyingCurrency { get; set; }
-        public Nullable<float> SharesPerADR { get; set; }
-        public Nullable<System.DateTime> IPODate { get; set; }
+        public float SharesPerADR { get; set; }
+        public string IPODate { get; set; }
         public string PricingCurrency { get; set; }
-        public Nullable<int> SettleDays { get; set; }
-        public Nullable<float> OutstandingShares { get; set; }
-        public Nullable<float> VotingRightsPerShare { get; set; }
-        public Nullable<float> AverageVolume { get; set; }
-        public Nullable<float> Beta { get; set; }
-        public Nullable<float> ShortInterest { get; set; }
-        public Nullable<float> ReturnYTD { get; set; }
-        public Nullable<float> Volatility { get; set; }
+        public int SettleDays { get; set; }
+        public float OutstandingShares { get; set; }
+        public float VotingRightsPerShare { get; set; }
+        public float AverageVolume { get; set; }
+        public float Beta { get; set; }
+        public float ShortInterest { get; set; }
+        public float ReturnYTD { get; set; }
+        public float Volatility { get; set; }
         public string AssetClass { get; set; }
         public string PFCountry { get; set; }
         public string PFCreditRating { get; set; }
         public string PFCurrency { get; set; }
         public string PFInstrument { get; set; }
         public string PFLiquidityProfile { get; set; }
-        public Nullable<System.DateTime> PFMaturity { get; set; }
+        public string PFMaturity { get; set; }
         public string PFNAICSCode { get; set; }
         public string PFRegion { get; set; }
         public string PFSector { get; set; }
@@ -56,18 +56,18 @@ namespace SecurityMaster_ST.Models
         public string BBGSector { get; set; }
         public string CountryOfIncorporation { get; set; }
         public string RiskCurrency { get; set; }
-        public Nullable<float> OpenPrice { get; set; }
-        public Nullable<float> ClosePrice { get; set; }
-        public Nullable<float> Volume { get; set; }
-        public Nullable<float> LastPrice { get; set; }
-        public Nullable<float> AskPrice { get; set; }
-        public Nullable<float> BidPrice { get; set; }
-        public Nullable<float> PERatio { get; set; }
-        public Nullable<System.DateTime> DividendDeclareDate { get; set; }
-        public Nullable<System.DateTime> DividendExDate { get; set; }
-        public Nullable<System.DateTime> DividendRecordDate { get; set; }
-        public Nullable<System.DateTime> DividendPayDate { get; set; }
-        public Nullable<float> DividendAmount { get; set; }
+        public float OpenPrice { get; set; }
+        public float ClosePrice { get; set; }
+        public float Volume { get; set; }
+        public float LastPrice { get; set; }
+        public float AskPrice { get; set; }
+        public float BidPrice { get; set; }
+        public float PERatio { get; set; }
+        public string DividendDeclareDate { get; set; }
+        public string DividendExDate { get; set; }
+        public string DividendRecordDate { get; set; }
+        public string DividendPayDate { get; set; }
+        public float DividendAmount { get; set; }
         public string Frequency { get; set; }
         public string DividendType { get; set; }
     }
