@@ -35,6 +35,22 @@ namespace SecurityMaster_ST.Controllers
 
             }
         }
+        [Route("api/equity/activity")]
+        public HttpResponseMessage GetActivity()
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                DataTable table = new DataTable();
+                string spName = "Equity.usp_ActiveEquity";
+                SqlCommand cmd = new SqlCommand(spName, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+                return Request.CreateResponse(HttpStatusCode.OK, table);
+
+            }
+        }
 
         public string Put(Equity equity)
         {
